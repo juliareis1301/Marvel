@@ -7,7 +7,7 @@ import './NavBar.css';
 import Search from '../Search/Search';
 import api from '../../../../api/api';
 import CardContainer from "../CardContainer/CardContainer";
-import { Routes, Route, } from 'react-router-dom';
+import { Link, Routes, Route, } from 'react-router-dom';
 import ComicsPage from "../../../Comics/ComicsPage";
 import SeriesPage from "../../../SeriesPage/SeriesPage";
 
@@ -24,11 +24,11 @@ const NavBar = () => {
       setResultsComics([]); // Limpa os resultados se a pesquisa estiver vazia
     } else {
       api
-      .get(`/series?titleStartsWith=${search}`)
-      .then((response) => {
+        .get(`/series?titleStartsWith=${search}`)
+        .then((response) => {
           setResultsSeries(response.data.data.results);
         })
-      .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
   }, [search]);
 
@@ -38,11 +38,11 @@ const NavBar = () => {
       setResultsComics([]); // Limpa os resultados se a pesquisa estiver vazia
     } else {
       api
-      .get(`/comics?titleStartsWith=${search}`)
-      .then((response) => {
+        .get(`/comics?titleStartsWith=${search}`)
+        .then((response) => {
           setResultsComics(response.data.data.results);
         })
-      .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
   }, [search]);
 
@@ -52,11 +52,11 @@ const NavBar = () => {
       setResults([]); // Limpa os resultados se a pesquisa estiver vazia
     } else {
       api
-      .get(`/characters?nameStartsWith=${search}`)
-      .then((response) => {
+        .get(`/characters?nameStartsWith=${search}`)
+        .then((response) => {
           setResults(response.data.data.results);
         })
-      .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
   }, [search]);
 
@@ -73,10 +73,18 @@ const NavBar = () => {
               navbarScroll
             >
               <Nav className="nav_link">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/characters">Characters</Nav.Link>
-                <Nav.Link href="/comics">Comics</Nav.Link>
-                <Nav.Link href="series">Series</Nav.Link>
+                <Nav.Link>                
+                  <Link  className="custom-link"  to="/">Home</Link>
+                </Nav.Link>
+                <Nav.Link >
+                  <Link  className="custom-link" to="/characters">Characters</Link>
+                </Nav.Link>
+                <Nav.Link >
+                  <Link  className="custom-link" to="/comics">Comics</Link>
+                </Nav.Link>
+                <Nav.Link >
+                  <Link  className="custom-link" to="/series">Series</Link>
+                </Nav.Link>
               </Nav>
             </Nav>
             <Search searched={setSearch} />
@@ -85,8 +93,8 @@ const NavBar = () => {
       </Navbar>
       <Routes>
         <Route path="/characters" element={<CardContainer characters={results} />} />
-        <Route path="/comics" element={<ComicsPage  comics={resultsComics} />}/>
-        <Route path="/series" element={<SeriesPage series={resultsSeries}/>}/>
+        <Route path="/comics" element={<ComicsPage comics={resultsComics} />} />
+        <Route path="/series" element={<SeriesPage series={resultsSeries} />} />
       </Routes>
 
     </div>
