@@ -1,0 +1,40 @@
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 auto;
+  max-width: 1200px;
+  justify-content: center;
+  padding-top: 50px;
+} 
+
+.title-characters{
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  font-weight: 600;
+  color:#606060;
+}
+.card-image{
+  width: 100%;
+  height: 250px; 
+  object-fit: cover;
+
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.card-image:hover{
+  -webkit-filter: drop-shadow(16px 12px 5px rgba(0,0,0,.5));
+    filter: drop-shadow(16px 12px 5px rgba(0,0,0,.5));
+}
+
+.card{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;}
+
+.ver_mais{
+  padding-top: 15px;
+}
