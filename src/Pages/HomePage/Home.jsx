@@ -7,7 +7,7 @@ import './Home.css'
 function Home() {
   return (
     <div>
-      <h1 className='title-home'>Welcome to the world of Marvel</h1>
+      <h1 className='title'>Welcome to the world of Marvel</h1>
     <Carousel>
       <Carousel.Item>
         <img
