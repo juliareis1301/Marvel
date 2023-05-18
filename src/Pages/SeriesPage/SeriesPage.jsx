@@ -9,14 +9,6 @@ const SeriesPage = ({ series }) => {
 
   const [searchedSeries, setSearchedSeries] = useState([])
 
-  useEffect(() => {
-    if (series && series.length > 0) {
-      setSearchedSeries(series);
-    } else {
-      fetchAllSeries();
-    }
-  },[series])
-
 
   const fetchAllSeries = useCallback(async () => {
     try {
@@ -26,6 +18,16 @@ const SeriesPage = ({ series }) => {
       console.log(err);
     }
   }, []);
+
+  useEffect(() => {
+    if (series && series.length > 0) {
+      setSearchedSeries(series);
+    } else {
+      fetchAllSeries();
+    }
+  },[series,fetchAllSeries])
+
+
 
   const handleMore = useCallback(async () => {
     try {
@@ -46,7 +48,7 @@ const SeriesPage = ({ series }) => {
 
   return(
     <div>
-    <h1 className='title-series'>Meet the Marvel Series</h1>
+    <h1 className='title'>Meet the Marvel Series</h1>
       <div className='series-container'>
         {searchedSeries.map(serie => (
           <Card key={serie.id} style={{ width: '18rem' }}>

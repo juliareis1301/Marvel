@@ -7,14 +7,6 @@ import Button from 'react-bootstrap/Button';
 const ComicsPage = ( { comics }) => {
   const [SearchedComics, setSearchedComics] = useState([]);
 
-  useEffect(() => {
-    if (comics && comics.length > 0) {
-      setSearchedComics(comics);
-    } else {
-      fetchAllComics();
-    }
-  }, [comics]);
-
   const fetchAllComics = useCallback(async () => {
     try {
       const response = await api.get('comics');
@@ -23,6 +15,14 @@ const ComicsPage = ( { comics }) => {
       console.log(err);
     }
   }, []);
+
+  useEffect(() => {
+    if (comics && comics.length > 0) {
+      setSearchedComics(comics);
+    } else {
+      fetchAllComics();
+    }
+  }, [comics,fetchAllComics]);
 
 
   const handleMore = useCallback(async () => {
@@ -42,7 +42,7 @@ const ComicsPage = ( { comics }) => {
 
   return (
     <div>
-      <h1 className='title-characters'>Meet the Marvel Comics</h1>
+      <h1 className='title'>Meet the Marvel Comics</h1>
       <div className='comic-container'>
         {SearchedComics.map(comic => (
           <Card key={comic.id} style={{ width: '18rem' }}>

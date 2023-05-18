@@ -5,16 +5,11 @@ import api from '../../../../api/api';
 import Button from 'react-bootstrap/Button';
 
 
+
 const CardContainer = ({ characters }) => {
   const [searchedCharacters, setSearchedCharacters] = useState([]);
 
-  useEffect(() => {
-    if (characters && characters.length > 0) {
-      setSearchedCharacters(characters);
-    } else {
-      fetchAllCharacters();
-    }
-  }, [characters] );
+
 
   const fetchAllCharacters = useCallback(async () => {
     try {
@@ -23,7 +18,16 @@ const CardContainer = ({ characters }) => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, []); 
+  
+  useEffect(() => {
+    if (characters && characters.length > 0) {
+      setSearchedCharacters(characters);
+    } else {
+      fetchAllCharacters();
+    }
+  }, [characters, fetchAllCharacters] );
+
 
   const handleMore = useCallback(async () => {
     try {
@@ -41,7 +45,7 @@ const CardContainer = ({ characters }) => {
 
   return (
     <div>
-      <h1 className='title-characters'>Meet the Marvel Characters</h1>
+      <h1 className='title'>Meet the Marvel Characters</h1>
         <div className='card-container'>
           {searchedCharacters.map(character => (
             <Card key={character.id} style={{ width: '15rem' }}>
